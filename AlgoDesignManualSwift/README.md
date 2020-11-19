@@ -1,0 +1,3 @@
+# AlgoDesignManualSwift
+
+A description of this package.
