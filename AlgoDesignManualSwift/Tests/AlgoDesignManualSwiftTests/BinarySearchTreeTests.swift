@@ -69,6 +69,30 @@ final class BinarySearchTreeTests: XCTestCase {
     XCTAssertEqual(results, [1,2,3])
   }
   
+  func test_insert() {
+    let root = setupTreeHelper()
+    
+    BinarySearchTree.insert(4, in: root)
+    
+    XCTAssertEqual(root.right!.right!.val, 4)
+    XCTAssertEqual(valuesInOrder(in: root), [1,2,3,4])
+    
+    BinarySearchTree.insert(6, in: root)
+    
+    XCTAssertEqual(root.right!.right!.right!.val, 6)
+    XCTAssertEqual(valuesInOrder(in: root), [1,2,3,4,6])
+    
+    BinarySearchTree.insert(7, in: root)
+    
+    XCTAssertEqual(root.right!.right!.right!.right!.val, 7)
+    XCTAssertEqual(valuesInOrder(in: root), [1,2,3,4,6,7])
+    
+    BinarySearchTree.insert(5, in: root)
+    
+    XCTAssertEqual(root.right!.right!.right!.left!.val, 5)
+    XCTAssertEqual(valuesInOrder(in: root), [1,2,3,4,5,6,7])
+  }
+  
   func setupTreeHelper() -> BinaryTreeNode {
     let two = BinaryTreeNode(2)
     let one = BinaryTreeNode(1)
@@ -77,6 +101,15 @@ final class BinarySearchTreeTests: XCTestCase {
     two.left = one
     two.right = three
     return two
+  }
+  
+  func valuesInOrder(in root: BinaryTreeNode) -> [Int] {
+    var results: [Int] = []
+    BinarySearchTree.traverse(root) { node in
+      results.append(node.val)
+    }
+    
+    return results
   }
   
 }

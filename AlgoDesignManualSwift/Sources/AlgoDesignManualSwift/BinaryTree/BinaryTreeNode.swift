@@ -92,4 +92,31 @@ extension BinarySearchTree {
     traverseHelper(node.right, handler)
   }
   
+  static func insert(_ val: Int, in root: BinaryTreeNode?) {
+    insertHelper(val, in: root, parent: nil)
+  }
+  
+  private static func insertHelper(_ val: Int, in root: BinaryTreeNode?, parent: BinaryTreeNode?) {
+    guard let node = root else {
+      let inserted = BinaryTreeNode(val)
+      if let parent = parent {
+        if val < parent.val {
+          parent.left = inserted
+        } else {
+          parent.right = inserted
+        }
+      }
+      return
+    }
+    
+    if node.val == val { return } // Do not allow duplicates in this BST implementation
+    
+    if val < node.val {
+      insertHelper(val, in: node.left, parent: node)
+    } else {
+      insertHelper(val, in: node.right, parent: node)
+    }
+    
+  }
+  
 }
