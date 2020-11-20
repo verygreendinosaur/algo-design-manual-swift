@@ -37,13 +37,46 @@ final class BinarySearchTreeTests: XCTestCase {
     XCTAssertEqual(BinaryTree.search(for: 3, in: root.right)!.val, 3)
   }
   
+  func test_findMax() {
+    let root = setupTreeHelper()
+    
+    XCTAssertNotNil(BinaryTree.findMax(in: root))
+    XCTAssertEqual(BinaryTree.findMax(in: root)!.val, 3)
+  }
+  
+  func test_findMin() {
+    let root = setupTreeHelper()
+    
+    XCTAssertNotNil(BinaryTree.findMin(in: root))
+    XCTAssertEqual(BinaryTree.findMin(in: root)!.val, 1)
+  }
+  
+  func test_findMinAndMax() {
+    let root = setupTreeHelper()
+    let result = BinaryTree.findMinAndMax(in: root)
+    
+    XCTAssertEqual(result.min!.val, 1)
+    XCTAssertEqual(result.max!.val, 3)
+  }
+  
+  func test_traverse() {
+    let root = setupTreeHelper()
+    var results: [Int] = []
+    BinaryTree.traverse(root) { node in
+      results.append(node.val)
+    }
+    
+    XCTAssertEqual(results, [1,2,3])
+  }
+  
   func setupTreeHelper() -> BinaryTreeNode {
     let two = BinaryTreeNode(2)
     let one = BinaryTreeNode(1)
     let three = BinaryTreeNode(3)
-    
+
     two.left = one
     two.right = three
     return two
   }
+  
 }

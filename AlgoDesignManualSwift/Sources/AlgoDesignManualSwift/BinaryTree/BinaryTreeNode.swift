@@ -44,4 +44,52 @@ extension BinaryTree {
     }
   }
   
+  /// Finds the max value in the BST. If the value exists, return the node. If the value does not exist, return nil.
+  static func findMax(in root: BinaryTreeNode?) -> BinaryTreeNode? {
+    return findMaxHelper(in: root)
+  }
+  
+  private static func findMaxHelper(in root: BinaryTreeNode?) -> BinaryTreeNode? {
+    guard let node = root else { return nil }
+    
+    if let right = node.right {
+      return findMax(in: right)
+    } else {
+      return node
+    }
+  }
+  
+  /// Finds the min value in the BST. If the value exists, return the node. If the value does not exist, return nil.
+  static func findMin(in root: BinaryTreeNode?) -> BinaryTreeNode? {
+    return findMinHelper(in: root)
+  }
+  
+  private static func findMinHelper(in root: BinaryTreeNode?) -> BinaryTreeNode? {
+    guard let node = root else { return nil }
+    
+    if let left = node.left {
+      return findMin(in: left)
+    } else {
+      return node
+    }
+  }
+  
+  /// Finds the min value in the BST. If the value exists, return the node. If the value does not exist, return nil.
+  static func findMinAndMax(in root: BinaryTreeNode?) -> (min: BinaryTreeNode?, max: BinaryTreeNode?) {
+    return (findMinHelper(in: root), findMaxHelper(in: root))
+  }
+  
+  /// Traverses the BST in order. Performs the specified action on each node.
+  static func traverse(_ root: BinaryTreeNode?, _ handler: (BinaryTreeNode) -> Void) {
+    traverseHelper(root, handler)
+  }
+  
+  private static func traverseHelper(_ root: BinaryTreeNode?, _ handler: (BinaryTreeNode) -> Void) {
+    guard let node = root else { return }
+    
+    traverseHelper(node.left, handler)
+    handler(node)
+    traverseHelper(node.right, handler)
+  }
+  
 }
