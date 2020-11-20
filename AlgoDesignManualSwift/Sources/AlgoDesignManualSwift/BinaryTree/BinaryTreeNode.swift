@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias BinaryTree = BinaryTreeNode
+typealias BinarySearchTree = BinaryTreeNode
 
 class BinaryTreeNode {
   
@@ -21,7 +21,7 @@ class BinaryTreeNode {
   
 }
 
-extension BinaryTree {
+extension BinarySearchTree {
   
   /// Search for target value in a BST. If value exists, return the node. If value does not exist, return nil. This version of a BST **does not support duplicate items**. Time: O(*h*) where *h* is height of tree. Space: No new space allocated.
   static func search(for target: Int, in tree: BinaryTreeNode?) -> BinaryTreeNode? {
